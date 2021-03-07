@@ -1,0 +1,21 @@
+version: '3'
+
+services:
+  backend:
+    env_file:
+        "./db-mappark/.env"
+    build:
+      context: ./db-mappark
+      dockerfile: ./Dockerfile
+    image: "team9/server"
+    ports:
+      - "3001:3001"
+  frontend:
+    build:
+      context: ./my-app
+      dockerfile: ./Dockerfile
+    image: "team9/my-app"
+    ports:
+      - "3000:3000"
+    links:
+      - "my-app"
